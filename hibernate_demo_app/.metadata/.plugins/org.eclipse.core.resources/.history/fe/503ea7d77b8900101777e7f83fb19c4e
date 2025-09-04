@@ -1,0 +1,9 @@
+package com.tss.repository;
+
+import com.tss.entity.ImageEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public class ImageRepository extends JpaRepository<ImageEntity, Long>{
+
+}

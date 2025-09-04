@@ -1,0 +1,7 @@
+package com.tss.entity;
+
+@Entity
+@Table(name = "images")
+public class ImageEntity {
+
+}

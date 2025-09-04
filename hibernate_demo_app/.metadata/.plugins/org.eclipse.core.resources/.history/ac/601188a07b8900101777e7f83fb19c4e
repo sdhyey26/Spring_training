@@ -1,0 +1,20 @@
+package com.tss.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "images")
+public class ImageEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    private String type;
+
+    @Lob
+    @Column(length = 100000)
+    private byte[] data;
+}

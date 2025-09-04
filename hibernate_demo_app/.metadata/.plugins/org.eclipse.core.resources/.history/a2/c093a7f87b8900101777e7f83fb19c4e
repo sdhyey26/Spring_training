@@ -1,0 +1,6 @@
+package com.tss.service;
+
+public class ImageService {
+    String uploadImage(MultipartFile file);
+    ImageResponseDto getImage(Long id);
+}

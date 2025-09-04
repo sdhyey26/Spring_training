@@ -1,0 +1,8 @@
+package com.tss.service;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class ImageService {
+    String uploadImage(MultipartFile file);
+    ImageResponseDto getImage(Long id);
+}

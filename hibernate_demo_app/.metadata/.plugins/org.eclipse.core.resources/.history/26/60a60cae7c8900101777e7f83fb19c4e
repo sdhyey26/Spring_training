@@ -1,0 +1,5 @@
+package com.tss.dto;
+
+public class ImageResponseDto {
+
+}
