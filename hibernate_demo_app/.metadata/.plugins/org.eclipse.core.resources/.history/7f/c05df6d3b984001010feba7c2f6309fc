@@ -1,0 +1,21 @@
+package com.tss.JPARepository.exception;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class EmployeeException extends RuntimeException {
+
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+	
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}

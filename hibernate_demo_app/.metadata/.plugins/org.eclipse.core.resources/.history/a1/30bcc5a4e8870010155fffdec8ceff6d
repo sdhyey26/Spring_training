@@ -1,0 +1,30 @@
+package com.tss.Entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Table(name = "Courses")
+@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+public class Course {
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long courseId;
+    @Column
+    private String courseName;
+    @Column
+    private int duration;
+    @Column
+    private double fees;
+    
+    private Instructor instructor;
+}

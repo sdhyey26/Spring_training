@@ -1,0 +1,6 @@
+package com.tss.Service;
+
+public interface InstructorService {
+    InstructorResponseDto addInstructor(InstructorRequestDto instructorRequestDto);
+
+}

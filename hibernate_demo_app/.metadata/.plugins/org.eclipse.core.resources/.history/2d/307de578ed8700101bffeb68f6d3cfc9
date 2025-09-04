@@ -1,0 +1,7 @@
+package com.tss.Service;
+
+@Service
+
+public class CourseServiceImpl implements CourseService {
+
+}

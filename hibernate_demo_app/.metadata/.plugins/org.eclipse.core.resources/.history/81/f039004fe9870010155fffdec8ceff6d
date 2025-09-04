@@ -1,0 +1,10 @@
+package com.tss.Config;
+
+public class ModelMapperConfig {
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+	
+}

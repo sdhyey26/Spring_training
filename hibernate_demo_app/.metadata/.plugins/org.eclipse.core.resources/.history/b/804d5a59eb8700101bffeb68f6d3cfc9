@@ -1,0 +1,26 @@
+package com.tss.Service;
+
+import com.tss.Dto.InstructorRequestDto;
+import com.tss.Dto.InstructorResponseDto;
+
+public class InstructorServiceImpl implements InstructorService{
+
+    @Autowired
+    private InstructorRepository instructorRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public InstructorResponseDto addInstructor(InstructorRequestDto instructorRequestDto) {
+        // Map DTO to entity
+        Instructor instructor = modelMapper.map(instructorRequestDto, Instructor.class);
+
+        // Save entity
+        Instructor savedInstructor = instructorRepository.save(instructor);
+
+        // Map back to response DTO
+        return modelMapper.map(savedInstructor, InstructorResponseDto.class);
+    }
+
+}

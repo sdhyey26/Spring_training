@@ -1,0 +1,13 @@
+package com.tss.Controller;
+
+public class InstructorController {
+
+    @Autowired
+    private InstructorService instructorService;
+
+    @PostMapping
+    public ResponseEntity<InstructorResponseDto> addInstructor(@RequestBody InstructorRequestDto requestDto) {
+        InstructorResponseDto responseDto = instructorService.addInstructor(requestDto);
+        return ResponseEntity.ok(responseDto);
+    }
+}

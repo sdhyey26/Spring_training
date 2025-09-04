@@ -1,0 +1,26 @@
+package com.tss.JPARepositorycom.Dto;
+
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class EmployeeRequestDto {
+    @NotBlank(message = "Name must not be empty")
+    private String name;
+
+    @Positive(message = "Salary must be greater than 0")
+    private double salary;
+
+    @NotBlank(message = "Department name must not be empty")
+    private String deptname;
+
+    @NotBlank(message = "Email must not be empty")
+    @Email(message = "Invalid email format")
+    private String email;
+
+}

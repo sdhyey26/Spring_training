@@ -1,0 +1,12 @@
+package com.tss.hibernate.config;
+
+import org.modelmapper.ModelMapper;
+
+@Bean
+public class AppConfig {
+
+	
+	ModelMapper mapper() {
+		return new ModelMapper();
+	}
+}

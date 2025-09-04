@@ -1,0 +1,7 @@
+package com.tss.Controller;
+
+@RestController
+@RequestMapping("/api/courses")
+public class CourseController {
+
+}

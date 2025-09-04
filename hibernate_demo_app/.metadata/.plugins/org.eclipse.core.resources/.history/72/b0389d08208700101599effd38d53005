@@ -1,0 +1,21 @@
+package com.tss.JPARepositorycom.Dto;
+
+import com.tss.JPARepository.entity.Address;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class EmployeeResponseDto {
+	private String name;
+    private double salary;
+
+	private String deptname;
+	private String email;
+	
+	private Address adress;
+
+}

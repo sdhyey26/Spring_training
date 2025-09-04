@@ -1,0 +1,43 @@
+package com.tss.Controller;
+
+@RestController
+@RequestMapping("/policies")
+public class InsurancePolicyController {
+
+    @Autowired
+    private InsurancePolicyService service;
+
+    @PostMapping
+    public InsurancePolicyResponseDto createPolicy(@RequestBody InsurancePolicyRequestDto dto) {
+        return service.createPolicy(dto);
+    }
+
+    @GetMapping
+    public InsurancePolicyResponsePage getAllPolicies(@RequestParam int page, @RequestParam int size) {
+        return service.getAllPolicies(page, size);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<InsurancePolicyResponseDto> getPolicyById(@PathVariable Long id) {
+        return service.getPolicyById(id);
+    }
+
+    @GetMapping("/search/holder")
+    public List<InsurancePolicyResponseDto> searchByHolder(@RequestParam String name,
+                                                           @RequestParam int page,
+                                                           @RequestParam int size) {
+        return service.searchByHolderName(name, page, size);
+    }
+
+    @GetMapping("/search/duration")
+    public List<InsurancePolicyResponseDto> searchByDuration(@RequestParam int years,
+                                                             @RequestParam int page,
+                                                             @RequestParam int size) {
+        return service.findByDurationLessThanYears(years, page, size);
+    }
+
+    @DeleteMapping("/{policyNumber}")
+    public void deleteByPolicyNumber(@PathVariable String policyNumber) {
+        service.deleteByPolicyNumber(policyNumber);
+    }
+}

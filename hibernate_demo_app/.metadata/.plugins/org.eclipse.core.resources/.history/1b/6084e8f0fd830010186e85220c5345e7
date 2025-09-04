@@ -1,0 +1,11 @@
+package com.tss.dto;
+
+import java.util.List;
+
+public class InsurancePolicyResponsePage {
+    private long totalElements;
+    private int totalPages;
+    private int size;
+    private boolean lastPage;
+    private List<InsurancePolicyResponseDto> contents;
+}

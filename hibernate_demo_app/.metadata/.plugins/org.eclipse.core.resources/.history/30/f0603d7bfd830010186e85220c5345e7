@@ -1,0 +1,9 @@
+package com.tss.repository;
+
+
+@Repository
+public interface InsurancePolicyRepository extends JpaRepository<InsurancePolicy, Long> {
+    Optional<InsurancePolicy> findByPolicyNumber(String policyNumber);
+
+    List<InsurancePolicy> findByHolderNameContainingIgnoreCase(String holderName);
+}

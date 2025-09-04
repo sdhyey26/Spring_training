@@ -1,0 +1,28 @@
+package com.tss.entity;
+
+
+@Entity
+@Table(name = "insurance_policies")
+public class InsurancePolicy {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String policyNumber;
+
+    private String holderName;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    private double amount;
+
+    @PrePersist
+    public void generatePolicyNumber() {
+        this.policyNumber = "POL-" + UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    // getters and setters
+}

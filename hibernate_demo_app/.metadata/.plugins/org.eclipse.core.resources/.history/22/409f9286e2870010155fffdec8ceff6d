@@ -1,0 +1,20 @@
+package com.tss.Entity;
+
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Table(name = "Courses")
+@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+public class Course {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long courseId;
+    private String courseName;
+    private int duration;
+    private double fees;
+}

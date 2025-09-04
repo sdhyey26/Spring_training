@@ -1,0 +1,22 @@
+package com.tss.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.tss.Dto.InstructorRequestDto;
+import com.tss.Dto.InstructorResponseDto;
+import com.tss.Service.InstructorService;
+
+public class InstructorController {
+
+    @Autowired
+    private InstructorService instructorService;
+
+    @PostMapping
+    public ResponseEntity<InstructorResponseDto> addInstructor(@RequestBody InstructorRequestDto requestDto) {
+        InstructorResponseDto responseDto = instructorService.addInstructor(requestDto);
+        return ResponseEntity.ok(responseDto);
+    }
+}

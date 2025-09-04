@@ -1,0 +1,14 @@
+package com.tss.Dto;
+
+public class MailRequestDto {
+
+    @Email
+    @NotBlank
+    private String receiver;
+
+    @NotBlank
+    private String subject;
+
+    @NotBlank
+    private String content;
+}

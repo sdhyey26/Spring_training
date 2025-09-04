@@ -1,0 +1,9 @@
+package com.tss.Service;
+
+import com.tss.Dto.InstructorRequestDto;
+import com.tss.Dto.InstructorResponseDto;
+
+public interface InstructorService {
+    InstructorResponseDto addInstructor(InstructorRequestDto instructorRequestDto);
+
+}

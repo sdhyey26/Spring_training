@@ -1,0 +1,52 @@
+package com.tss.JPARepository.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tss.JPARepository.Repository.StudentRepository;
+import com.tss.JPARepository.entity.Address;
+import com.tss.JPARepository.entity.Employee;
+import com.tss.JPARepository.entity.Student;
+import com.tss.JPARepository.exception.EmployeeException;
+
+@Service
+public class StudentServiceImpl implements StudentService{
+
+	@Autowired
+	private StudentRepository studentRepo;
+	
+	@Override
+	public List<Student> readAllStudents() {
+		return studentRepo.findAll();
+	}
+
+	@Override
+	public Student addStudent(Student student) {
+		return studentRepo.save(student);
+	}
+	
+    @Override
+    public Employee updateEmployeeAddress(Integer employeeId, Address updatedAddress) {
+        Optional<Employee> employeeOpt = employerepo.findById(employeeId);
+
+        if (employeeOpt.isEmpty()) {
+            throw new EmployeeException("Employee not found with id: " + employeeId);
+        }
+
+        Employee employee = employeeOpt.get();
+
+        if (employee.getAddress() == null) {
+            employee.setAddress(updatedAddress);
+        } else {
+            Address existingAddress = employee.getAddress();
+            existingAddress.setCity(updatedAddress.getCity());
+            existingAddress.setPincode(updatedAddress.getPincode());
+        }
+
+        return employerepo.save(employee);
+    }
+
+}

@@ -1,0 +1,9 @@
+package com.tss.Service;
+
+import com.tss.Dto.MailRequestDto;
+import com.tss.Dto.MailResponseDto;
+
+public class MailService {
+    MailResponseDto sendMail(MailRequestDto mailRequestDto);
+
+}

@@ -1,0 +1,5 @@
+package com.tss.JPARepository.Config;
+
+public class ModelMapperConfig {
+
+}

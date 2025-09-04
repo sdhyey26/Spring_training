@@ -1,0 +1,41 @@
+package com.tss.dto;
+
+import java.util.List;
+
+public class InsurancePolicyResponsePage {
+    public long getTotalElements() {
+		return totalElements;
+	}
+	public void setTotalElements(long totalElements) {
+		this.totalElements = totalElements;
+	}
+	public int getTotalPages() {
+		return totalPages;
+	}
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	public boolean isLastPage() {
+		return lastPage;
+	}
+	public void setLastPage(boolean lastPage) {
+		this.lastPage = lastPage;
+	}
+	public List<InsurancePolicyResponseDto> getContents() {
+		return contents;
+	}
+	public void setContents(List<InsurancePolicyResponseDto> contents) {
+		this.contents = contents;
+	}
+	private long totalElements;
+    private int totalPages;
+    private int size;
+    private boolean lastPage;
+    private List<InsurancePolicyResponseDto> contents;
+}

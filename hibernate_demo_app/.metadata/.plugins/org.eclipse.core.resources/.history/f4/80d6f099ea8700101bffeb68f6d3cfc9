@@ -1,0 +1,5 @@
+package com.tss.Repository;
+
+public interface InstructorRepository extends JpaRepository<Instructor, Long>{
+
+}

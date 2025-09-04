@@ -1,0 +1,17 @@
+package com.tss.Entity;
+
+import org.aspectj.lang.annotation.RequiredTypes;
+
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+@Table
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Data
+public class Instructor {
+
+}

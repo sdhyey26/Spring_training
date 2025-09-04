@@ -1,0 +1,128 @@
+package com.tss.JPARepository.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.tss.JPARepository.Repository.EmployeeRepository;
+import com.tss.JPARepository.entity.Employee;
+import com.tss.JPARepositorycom.Dto.EmployeeRequestDto;
+import com.tss.JPARepositorycom.Dto.EmployeeResponseDto;
+import com.tss.JPARepositorycom.Dto.EmployeeResponsePage;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+	@Autowired
+	private EmployeeRepository employerepo;
+	
+    @Autowired
+    private ModelMapper modelMapper; 
+	
+	public Optional<Employee> readEmployeeById(Integer id) {
+		return employerepo.findById(id);
+	}
+	
+	
+	/**
+	 *
+	 */
+	
+	@Override
+	public EmployeeResponsePage readAllEmployees(int pageSize, int pageNumber) {
+		
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		Page<Employee> employeePage = employerepo.findAll(pageable);
+		
+		EmployeeResponsePage employeeResponse = new EmployeeResponsePage();
+		
+		employeeResponse.setTotalElments(employeePage.getTotalElements());
+		employeeResponse.setSize(employeePage.getSize());
+		employeeResponse.setTotalPages(employeePage.getTotalPages());
+		employeeResponse.setLastPage(employeePage.isLast());
+		
+		List<Employee> dbEmployees = new ArrayList<>();
+		
+		 for (Employee employee : employeePage.getContent()) {
+			 dbEmployees.add(employee);
+		 }
+		 employeeResponse.setContents(dbEmployees);
+		 
+		 return employeeResponse;
+	}
+	
+//	@Override
+//    public EmployeeResponsePage readAllEmployee(int pageSize, int pageNo) {
+//        
+//        Pageable pageable = PageRequest.of(pageNo, pageSize);
+//
+//        Page<Employee> employeePage = employeeRepository.findAll(pageable);
+//
+//        EmployeeResponsePage responsePage = new EmployeeResponsePage();
+//        
+//        responsePage.setTotalElements(employeePage.getTotalElements());
+//        responsePage.setLastPage(employeePage.isLast());
+//        responsePage.setSize(employeePage.getSize());
+//        responsePage.setTotalPages(employeePage.getTotalPages());
+//        
+//        List<Employee> employees = new ArrayList<>();
+//        for (Employee employee : employeePage.getContent()) {
+//            employees.add(employee);
+//        }
+//        responsePage.setContents(employees);
+//
+//        return responsePage;
+//    }
+	
+	@Override
+	public Employee EmployeeRequestDtotoEmployee(EmployeeRequestDto EmployeeDto) {
+		Employee employee = new Employee();
+		
+		employee.setDeptname(EmployeeDto.getDeptname());
+		employee.setName(EmployeeDto.getName());
+		employee.setSalary(EmployeeDto.getSalary());
+		
+		return employee;
+	}
+	
+	
+	@Override
+	public Employee addEmployee(Employee employee) {
+		return employerepo.save(employee);
+	}
+
+
+	@Override
+	public Optional<Employee> readEmployeeByName(String name) {
+		// TODO Auto-generated method stub
+		return employerepo.findByName(name);
+	}
+
+
+	@Override
+	public EmployeeResponseDto addNewEmployee(EmployeeRequestDto EmployeeDto) {
+		// TODO Auto-generated method stub
+		Employee employee = EmployeeRequestDtotoEmployee(EmployeeDto);
+		Employee dbEmployee = employerepo.save(employee);
+		return EmployeeToEmployeeResponseDto(dbEmployee);
+	}
+
+
+	public EmployeeResponseDto EmployeeToEmployeeResponseDto(Employee dbEmployee) {
+	    EmployeeResponseDto responseDto = new EmployeeResponseDto();
+	    
+	    responseDto.setName(dbEmployee.getName());
+	    responseDto.setDeptname(dbEmployee.getDeptname());
+	    
+	    
+	    return responseDto;
+	}
+
+}

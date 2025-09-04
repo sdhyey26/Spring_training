@@ -1,0 +1,23 @@
+package com.tss.Service;
+
+public class MailServiceImpl {
+	  @Autowired
+	    private JavaMailSender mailSender;
+
+	    @Override
+	    public MailResponseDto sendMail(MailRequestDto mailRequestDto) {
+	        try {
+	            SimpleMailMessage message = new SimpleMailMessage();
+	            message.setFrom("yourfixedsender@gmail.com"); // fixed sender
+	            message.setTo(mailRequestDto.getReceiver());
+	            message.setSubject(mailRequestDto.getSubject());
+	            message.setText(mailRequestDto.getContent());
+
+	            mailSender.send(message);
+
+	            return new MailResponseDto("SUCCESS", "Mail sent successfully to " + mailRequestDto.getReceiver());
+	        } catch (Exception e) {
+	            return new MailResponseDto("FAILED", "Error sending mail: " + e.getMessage());
+	        }
+	    }
+}

@@ -1,0 +1,12 @@
+package com.tss.Controller;
+
+public class MailController {
+    @Autowired
+    private MailService mailService;
+
+    @PostMapping("/send")
+    public ResponseEntity<MailResponseDto> sendMail(@Valid @RequestBody MailRequestDto mailRequestDto) {
+        MailResponseDto response = mailService.sendMail(mailRequestDto);
+        return ResponseEntity.ok(response);
+    }
+}

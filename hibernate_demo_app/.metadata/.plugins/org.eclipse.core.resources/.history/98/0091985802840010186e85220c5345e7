@@ -1,0 +1,17 @@
+package com.tss.service;
+
+import java.util.Optional;
+
+import com.tss.dto.InsurancePolicyRequestDto;
+import com.tss.dto.InsurancePolicyResponseDto;
+import com.tss.dto.InsurancePolicyResponsePage;
+
+public interface InsurancePolicyService {
+
+	
+	public InsurancePolicyResponseDto createPolicy(InsurancePolicyRequestDto dto);
+	
+	public InsurancePolicyResponsePage getAllPolicies(int pageNumber, int pageSize);
+	
+	public Optional<InsurancePolicyResponseDto> getPolicyById(Long id);
+}

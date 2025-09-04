@@ -1,0 +1,9 @@
+package com.tss.Dto;
+
+@Data
+@AllArgsConstructor
+public class MailResponseDto {
+
+    private String status;
+    private String message;
+}

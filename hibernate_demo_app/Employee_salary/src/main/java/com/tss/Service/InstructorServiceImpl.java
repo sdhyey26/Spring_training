@@ -1,0 +1,30 @@
+package com.tss.Service;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tss.Dto.InstructorRequestDto;
+import com.tss.Dto.InstructorResponseDto;
+import com.tss.Entity.Instructor;
+import com.tss.Repository.InstructorRepository;
+
+@Service
+public class InstructorServiceImpl implements InstructorService{
+
+    @Autowired
+    private InstructorRepository instructorRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public InstructorResponseDto addInstructor(InstructorRequestDto instructorRequestDto) {
+        Instructor instructor = modelMapper.map(instructorRequestDto, Instructor.class);
+
+        Instructor savedInstructor = instructorRepository.save(instructor);
+
+        return modelMapper.map(savedInstructor, InstructorResponseDto.class);
+    }
+
+}

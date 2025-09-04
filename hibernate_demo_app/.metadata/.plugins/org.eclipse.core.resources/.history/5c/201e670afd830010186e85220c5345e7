@@ -1,0 +1,9 @@
+package com.tss.dto;
+
+public class InsurancePolicyResponseDto {
+    private String policyNumber;
+    private String holderName;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private double amount;
+}

@@ -1,0 +1,7 @@
+package com.tss.JPARepository.Service;
+
+public class EmployeeException extends Exception {
+
+	private String message;
+	
+}

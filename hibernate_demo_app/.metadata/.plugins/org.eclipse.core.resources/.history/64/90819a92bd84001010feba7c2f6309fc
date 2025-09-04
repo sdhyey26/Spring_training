@@ -1,0 +1,42 @@
+import com.tss.JPARepository.entity.Employee;
+import com.tss.JPARepository.exception.EmployeeException;
+import com.tss.JPARepositorycom.Dto.EmployeeRequestDto;
+import com.tss.JPARepositorycom.Dto.EmployeeResponseDto;
+
+@Override
+public EmployeeResponseDto addNewEmployee(EmployeeRequestDto employeeDto) {
+
+    if (employeeDto.getName() == null || employeeDto.getName().trim().isEmpty()) {
+        throw new EmployeeException("Name must not be empty");
+    }
+
+    if (employeeDto.getDeptname() == null || employeeDto.getDeptname().trim().isEmpty()) {
+        throw new EmployeeException("Department name must not be empty");
+    }
+
+    if (employeeDto.getSalary() <= 0) {
+        throw new EmployeeException("Salary must be greater than 0");
+    }
+
+    if (employeeDto.getEmail() == null || employeeDto.getEmail().trim().isEmpty()) {
+        throw new EmployeeException("Email must not be empty");
+    }
+
+    // Simple email format check
+    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    if (!employeeDto.getEmail().matches(emailRegex)) {
+        throw new EmployeeException("Invalid email format");
+    }
+
+    // Optional: Check if email already exists
+    if (employerepo.findByEmail(employeeDto.getEmail()).isPresent()) {
+        throw new EmployeeException("Email already exists");
+    }
+
+    // Mapping DTO to Entity
+    Employee employee = modelMapper.map(employeeDto, Employee.class);
+    Employee dbEmployee = employerepo.save(employee);
+
+    // Return Response DTO
+    return modelMapper.map(dbEmployee, EmployeeResponseDto.class);
+}

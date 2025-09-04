@@ -1,0 +1,10 @@
+package com.tss.service;
+
+import com.tss.dto.InsurancePolicyRequestDto;
+import com.tss.dto.InsurancePolicyResponseDto;
+
+public interface InsurancePolicyService {
+
+	
+	public InsurancePolicyResponseDto createPolicy(InsurancePolicyRequestDto dto);
+}

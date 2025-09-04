@@ -1,0 +1,32 @@
+package com.tss.JPARepository.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.tss.JPARepository.error.ResponseError;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(EmployeeException.class)
+    public ResponseEntity<ResponseError> handleEmployeeException(EmployeeException ex) {
+        ResponseError error = new ResponseError(
+                HttpStatus.BAD_REQUEST.value(), 
+                System.currentTimeMillis(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ResponseError> handleGlobalException(Exception ex) {
+        ResponseError error = new ResponseError(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                System.currentTimeMillis(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

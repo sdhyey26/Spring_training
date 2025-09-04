@@ -1,0 +1,49 @@
+package com.tss.Service;
+
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tss.Dto.CourseRequestDto;
+import com.tss.Dto.CourseResponseDto;
+import com.tss.Entity.Course;
+import com.tss.Entity.Instructor;
+import com.tss.Repository.CourseRepository;
+import com.tss.Repository.InstructorRepository;
+
+@Service
+public class CourseServiceImpl implements CourseService {
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private InstructorRepository instructorRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public CourseResponseDto addCourse(CourseRequestDto courseRequestDto) {
+    	
+        if (courseRequestDto.getInstructorid() == null) {
+            throw new IllegalArgumentException("Instructor ID cannot be null");
+        }
+    	
+        Course course = modelMapper.map(courseRequestDto, Course.class);
+
+        Optional<Instructor> instructor = instructorRepository.findById(courseRequestDto.getInstructorid());s
+
+        if(instructor.isEmpty()) {
+        course.setInstructor(instructor);
+
+        Course savedCourse = courseRepository.save(course);
+
+        CourseResponseDto responseDto = modelMapper.map(savedCourse, CourseResponseDto.class);
+        responseDto.setInstructorName(savedCourse.getInstructor().getName());
+        return responseDto;
+    }
+
+}

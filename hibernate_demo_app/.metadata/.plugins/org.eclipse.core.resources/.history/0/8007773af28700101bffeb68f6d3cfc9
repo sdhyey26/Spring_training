@@ -1,0 +1,11 @@
+package com.tss.Service;
+
+import org.springframework.stereotype.Service;
+
+import com.tss.Dto.InstructorRequestDto;
+import com.tss.Dto.InstructorResponseDto;
+
+public interface InstructorService {
+    InstructorResponseDto addInstructor(InstructorRequestDto instructorRequestDto);
+
+}

@@ -1,0 +1,38 @@
+package com.tss.entity;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "insurance_policies")
+public class InsurancePolicy {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String policyNumber;
+
+    private String holderName;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    private double amount;
+
+    @PrePersist
+    public void generatePolicyNumber() {
+        this.policyNumber = "POL-" + UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    // getters and setters
+}

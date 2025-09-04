@@ -1,0 +1,8 @@
+package com.tss.Dto;
+
+public class CourseRequestDto {
+    private String courseName;
+    private int duration;
+    private double fees;
+    private Long instructorId;
+}

@@ -1,0 +1,33 @@
+package com.tss.Service;
+
+import org.springframework.stereotype.Service;
+
+import com.tss.Dto.CourseResponseDto;
+import com.tss.Entity.Course;
+import com.tss.Entity.Instructor;
+
+@Service
+public class CourseServiceImpl implements CourseService {
+
+    Course course = modelMapper.map(courseRequestDto, Course.class);
+
+    // Only fetch and assign instructor if instructorId is not null
+    if (courseRequestDto.getInstructorid() != null) {
+        Instructor instructor = instructorRepository.findById(courseRequestDto.getInstructorid())
+                .orElseThrow(() -> new RuntimeException(
+                        "Instructor not found with ID: " + courseRequestDto.getInstructorid()));
+        course.setInstructor(instructor);
+
+        instructor.getCourses().add(course);
+    }
+
+    Course savedCourse = courseRepository.save(course);
+
+    CourseResponseDto responseDto = modelMapper.map(savedCourse, CourseResponseDto.class);
+    if (savedCourse.getInstructor() != null) {
+        responseDto.setInstructorName(savedCourse.getInstructor().getName());
+    }
+
+    return responseDto;
+
+}

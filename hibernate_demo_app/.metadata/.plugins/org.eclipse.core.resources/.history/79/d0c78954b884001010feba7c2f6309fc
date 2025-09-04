@@ -1,0 +1,10 @@
+package com.tss.JPARepository.exception;
+
+public class EmployeeException extends RuntimeException {
+
+	private String message;
+	
+	public String getMessage() {
+		return message;
+	}
+}

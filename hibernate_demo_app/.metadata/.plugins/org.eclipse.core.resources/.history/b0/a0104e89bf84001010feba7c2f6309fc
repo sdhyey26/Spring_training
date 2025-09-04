@@ -1,0 +1,31 @@
+package com.tss.JPARepository.exception;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class EmployeeException extends RuntimeException {
+
+	public class InvalidNameException extends RuntimeException {
+	    public InvalidNameException(String message) {
+	        super(message);
+	    }
+	}
+
+	public class InvalidSalaryException extends RuntimeException {
+	    public InvalidSalaryException(String message) {
+	        super(message);
+	    }
+	}
+
+	public class InvalidDepartmentException extends RuntimeException {
+	    public InvalidDepartmentException(String message) {
+	        super(message);
+	    }
+	}
+
+	public class InvalidEmailException extends RuntimeException {
+	    public InvalidEmailException(String message) {
+	        super(message);
+	    }
+	}
+}
