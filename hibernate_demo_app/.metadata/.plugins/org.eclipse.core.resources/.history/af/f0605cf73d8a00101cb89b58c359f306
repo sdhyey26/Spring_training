@@ -1,0 +1,8 @@
+package com.tss.repository;
+
+
+import com.tss.entity.ImageEntity;
+
+public interface ImageRepository {
+
+}

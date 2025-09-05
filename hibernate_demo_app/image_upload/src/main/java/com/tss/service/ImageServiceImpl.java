@@ -13,6 +13,8 @@ import com.tss.repository.ImageRepository;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+
+
     @Autowired
     private ImageRepository imageRepository;
 
@@ -33,8 +35,7 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageResponseDto getImage(Long id) {
-        ImageEntity image = imageRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Image not found with id: " + id));
+        ImageEntity image = imageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image not found with id: " + id));
 
         return new ImageResponseDto(
                 image.getName(),
@@ -42,4 +43,6 @@ public class ImageServiceImpl implements ImageService {
                 image.getData()
         );
     }
+    
+    
 }

@@ -1,0 +1,18 @@
+package com.tss.controller;
+
+public class ImageController1 {
+
+	
+    @Autowired
+    private ImageService imageService;
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            String imageUrl = imageService.uploadImage(file);
+            return ResponseEntity.ok("Image uploaded successfully: " + imageUrl);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Image upload failed: " + e.getMessage());
+        }
+    }
+}

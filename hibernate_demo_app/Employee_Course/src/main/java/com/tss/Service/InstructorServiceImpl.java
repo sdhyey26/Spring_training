@@ -13,7 +13,9 @@ import com.tss.Repository.CourseRepository;
 import com.tss.Repository.InstructorRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class InstructorServiceImpl implements InstructorService{
 
@@ -28,9 +30,11 @@ public class InstructorServiceImpl implements InstructorService{
 
     @Override
     public InstructorResponseDto addInstructor(InstructorRequestDto instructorRequestDto) {
+        log.info("Add instructor request received: name={}", instructorRequestDto.getName());
         Instructor instructor = modelMapper.map(instructorRequestDto, Instructor.class);
 
         Instructor savedInstructor = instructorRepository.save(instructor);
+        log.info("Instructor saved: id={}", savedInstructor.getInstructorId());
 
         return modelMapper.map(savedInstructor, InstructorResponseDto.class);
     }
@@ -38,6 +42,7 @@ public class InstructorServiceImpl implements InstructorService{
     @Override
     @Transactional
     public CourseResponseDto assignCourseToInstructor(Long instructorId, Long courseId) {
+        log.info("Assigning course to instructor: instructorId={}, courseId={}", instructorId, courseId);
 
         Instructor instructor = instructorRepository.findById(instructorId)
                 .orElseThrow(() -> new RuntimeException("Instructor not found with ID: " + instructorId));
@@ -48,6 +53,7 @@ public class InstructorServiceImpl implements InstructorService{
         course.setInstructor(instructor);
 
         Course updatedCourse = courseRepository.save(course);
+        log.info("Course {} assigned to instructor {}", updatedCourse.getCourseId(), instructor.getInstructorId());
 
         CourseResponseDto responseDto = modelMapper.map(updatedCourse, CourseResponseDto.class);
         responseDto.setInstructorName(instructor.getName());

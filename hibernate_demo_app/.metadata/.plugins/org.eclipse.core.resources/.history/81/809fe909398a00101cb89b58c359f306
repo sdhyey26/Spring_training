@@ -1,0 +1,7 @@
+spring.application.name=image_upload
+
+spring.datasource.url=jdbc:mysql://localhost:3306/image_db
+spring.datasource.username=root
+spring.datasource.password=Dhyey1212
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
