@@ -1,5 +1,0 @@
-package com.tss.JPARepository.error;
-
-public class ResponseError {
-
-}

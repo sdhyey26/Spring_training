@@ -1,8 +1,0 @@
-package com.tss.hibernate.config;
-
-public class AppConfig {
-
-	ModelMapper mapper() {
-		
-	}
-}

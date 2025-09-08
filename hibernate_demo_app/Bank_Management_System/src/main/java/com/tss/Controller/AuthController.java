@@ -1,0 +1,29 @@
+package com.tss.Controller;
+
+import com.tss.Dto.AuthLoginRequestDto;
+import com.tss.Dto.AuthRegisterRequestDto;
+import com.tss.Dto.AuthResponseDto;
+import com.tss.Service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponseDto> register(@RequestBody AuthRegisterRequestDto request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthLoginRequestDto request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+}
+
+

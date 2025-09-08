@@ -1,8 +1,0 @@
-package com.tss.JPARepository.error;
-
-public class ResponseError {
-
-	private int status;
-	private long timeStamp;
-	
-}
