@@ -33,19 +33,18 @@ public class AuthServiceImpl implements AuthService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private JwtTokenProvider tokenProvider;
-	@Autowired
-	private RegistrationDto registrationDto;
+	// Removed unused field: registrationDto
 
 	@Override
 	public UserResponseDto register(RegistrationDto registration) {
-		if (userRepo.existsByUsername(registrationDto.getUsername()))
+		if (userRepo.existsByUsername(registration.getUsername()))
 			throw new UserApiException(HttpStatus.BAD_REQUEST, "User already exists");
 
 		User user = new User();
-		user.setUsername(registrationDto.getUsername());
-		user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+		user.setUsername(registration.getUsername());
+		user.setPassword(passwordEncoder.encode(registration.getPassword()));
 
-		Role userRole = roleRepo.findByRolename(registrationDto.getRole()).get();
+		Role userRole = roleRepo.findByRoleName(registration.getRole()).get();
 		userRole.getUsers().add(user);
 		user.setRole(userRole);
 
