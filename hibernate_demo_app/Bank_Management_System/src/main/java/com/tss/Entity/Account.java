@@ -1,5 +1,6 @@
 package com.tss.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Account {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @Column(name = "name", length = 100, nullable = false)
@@ -36,7 +38,7 @@ public class Account {
     private String aadhar;
 
     @Column(name = "account_type", length = 20, nullable = false)
-    private String accountType; // Savings | Current
+    private String accountType; 
 
     @Column(name = "balance", precision = 15, scale = 2, nullable = false)
     private BigDecimal balance;

@@ -5,13 +5,18 @@ import com.tss.Dto.Admin.AdminUpdateAccountRequestDto;
 import com.tss.Dto.Admin.AdminUpdateUserRequestDto;
 import com.tss.Entity.Account;
 import com.tss.Entity.CardApplication;
+import com.tss.Entity.Transaction;
 import com.tss.Entity.User;
 import com.tss.Exception.BadRequestException;
 import com.tss.Exception.ResourceNotFoundException;
 import com.tss.Repository.AccountRepository;
 import com.tss.Repository.CardApplicationRepository;
+import com.tss.Repository.TransactionRepository;
 import com.tss.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +30,7 @@ public class AdminService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private final CardApplicationRepository cardApplicationRepository;
+    private final TransactionRepository transactionRepository;
 
     public List<User> listUsers() {
         return userRepository.findAll();
@@ -32,6 +38,18 @@ public class AdminService {
 
     public List<Account> listAccounts() {
         return accountRepository.findAll();
+    }
+    
+    public List<CardApplication> listCardApplications() {
+        return cardApplicationRepository.findAll();
+    }
+
+    public Page<Transaction> listTransactions(String accountNumber, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        if (accountNumber == null || accountNumber.isBlank()) {
+            return transactionRepository.findAll(pageable);
+        }
+        return transactionRepository.findByFromAccountOrToAccount(accountNumber, accountNumber, pageable);
     }
 
     @Transactional
@@ -63,7 +81,15 @@ public class AdminService {
 
     @Transactional
     public void deleteAccount(String accountNumber) {
+        if (!accountRepository.existsById(accountNumber)) {
+            throw new ResourceNotFoundException("Account not found");
+        }
+        
+        cardApplicationRepository.deleteByAccountNumberNative(accountNumber);
+        System.out.println("Deleted all card applications for account " + accountNumber + " using native SQL");
+        
         accountRepository.deleteById(accountNumber);
+        System.out.println("Successfully deleted account " + accountNumber);
     }
 
     @Transactional

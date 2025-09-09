@@ -1,5 +1,6 @@
 package com.tss.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,10 +21,12 @@ public class CardApplication {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_number", referencedColumnName = "account_number", nullable = false)
+    @JsonIgnore
     private Account account;
 
     @Column(name = "card_type", length = 50, nullable = false)
@@ -38,5 +41,3 @@ public class CardApplication {
     @Column(name = "approved_at")
     private Instant approvedAt;
 }
-
-

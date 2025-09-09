@@ -6,6 +6,8 @@ import com.tss.Dto.Admin.AdminUpdateUserRequestDto;
 import com.tss.Entity.Account;
 import com.tss.Entity.CardApplication;
 import com.tss.Entity.User;
+import com.tss.Entity.Transaction;
+import org.springframework.data.domain.Page;
 import com.tss.Service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -52,9 +54,23 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/cards")
+    public ResponseEntity<List<CardApplication>> listCardApplications() {
+        return ResponseEntity.ok(adminService.listCardApplications());
+    }
+
     @PostMapping("/cards/action")
     public ResponseEntity<CardApplication> cardAction(@RequestBody AdminCardActionRequestDto request) {
         return ResponseEntity.ok(adminService.cardAction(request));
+    }
+
+    @GetMapping("/transactions")
+    public ResponseEntity<Page<Transaction>> listTransactions(
+            @RequestParam(required = false) String accountNumber,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(adminService.listTransactions(accountNumber, page, size));
     }
 }
 
