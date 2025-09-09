@@ -15,6 +15,7 @@ public class AuthResponseDto {
     private Long userId;
     private String username;
     private String role;
+    private String token;
 }
 
 

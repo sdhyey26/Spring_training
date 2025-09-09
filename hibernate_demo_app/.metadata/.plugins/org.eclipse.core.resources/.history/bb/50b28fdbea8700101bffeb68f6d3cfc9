@@ -1,8 +1,0 @@
-package com.tss.Dto;
-
-public class InstructorRequestDto {
-
-    private String name;
-    private String qualification;
-    private int experience;
-}

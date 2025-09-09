@@ -9,6 +9,8 @@ import com.tss.Entity.User;
 import com.tss.Entity.Transaction;
 import org.springframework.data.domain.Page;
 import com.tss.Service.AdminService;
+import com.tss.Service.AdminDashboardService;
+import com.tss.Dto.Admin.AdminDashboardDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+    private final AdminDashboardService adminDashboardService;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> listUsers() {
@@ -71,6 +74,11 @@ public class AdminController {
             @RequestParam(defaultValue = "10") int size
     ) {
         return ResponseEntity.ok(adminService.listTransactions(accountNumber, page, size));
+    }
+
+    @GetMapping("/dashboard")
+    public ResponseEntity<AdminDashboardDto> dashboard() {
+        return ResponseEntity.ok(adminDashboardService.getDashboard());
     }
 }
 

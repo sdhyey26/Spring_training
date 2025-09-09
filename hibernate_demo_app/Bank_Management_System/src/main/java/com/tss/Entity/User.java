@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     @Column(name = "role", nullable = false, length = 20)
-    private String role; // Admin | Customer
+    private String role; 
 
     @Column(name = "full_name", length = 100)
     private String fullName;

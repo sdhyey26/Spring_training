@@ -55,6 +55,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/register").permitAll()
                 .requestMatchers("/api/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/studentapp/**").authenticated()
+                .requestMatchers("/api/accounts/**").authenticated()
                 .requestMatchers(HttpMethod.POST, "/studentapp/**").authenticated()
                 .requestMatchers(HttpMethod.PUT, "/studentapp/**").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/studentapp/**").authenticated()

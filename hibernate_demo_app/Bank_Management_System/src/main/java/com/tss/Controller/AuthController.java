@@ -1,13 +1,21 @@
 package com.tss.Controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.tss.Dto.AuthLoginRequestDto;
 import com.tss.Dto.AuthRegisterRequestDto;
 import com.tss.Dto.AuthResponseDto;
+import com.tss.Dto.ChangePasswordRequestDto;
+import com.tss.Dto.ForgotPasswordRequestDto;
+import com.tss.Dto.ResetPasswordRequestDto;
 import com.tss.Service.AuthService;
-import jakarta.servlet.http.HttpServletRequest;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,20 +30,35 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthLoginRequestDto request, HttpServletRequest httpRequest) {
+    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthLoginRequestDto request) {
         AuthResponseDto resp = authService.login(request);
-        httpRequest.getSession(true).setAttribute("userId", resp.getUserId());
-        httpRequest.getSession().setAttribute("role", resp.getRole());
         return ResponseEntity.ok(resp);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest request) {
-        if (request.getSession(false) != null) {
-            request.getSession(false).invalidate();
-        }
+    public ResponseEntity<Void> logout() {
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<Void> changePassword(@AuthenticationPrincipal(expression = "username") String username,
+                                               @RequestBody ChangePasswordRequestDto request) {
+        Long userId = authService
+                .login(new AuthLoginRequestDto(username, request.getOldPassword()))
+                .getUserId();
+        authService.changePassword(userId, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<Void> forgotPassword(@RequestBody ForgotPasswordRequestDto request) {
+        authService.forgotPassword(request);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Void> resetPassword(@RequestBody ResetPasswordRequestDto request) {
+        authService.resetPassword(request);
         return ResponseEntity.noContent().build();
     }
 }
-
-

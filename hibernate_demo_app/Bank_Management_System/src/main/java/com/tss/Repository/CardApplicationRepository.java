@@ -12,6 +12,7 @@ import java.util.List;
 public interface CardApplicationRepository extends JpaRepository<CardApplication, Long> {
     List<CardApplication> findByUser(User user);
     List<CardApplication> findByStatus(String status);
+    long countByStatus(String status);
     
     @Query("SELECT ca FROM CardApplication ca WHERE ca.account.accountNumber = :accountNumber")
     List<CardApplication> findByAccountNumber(@Param("accountNumber") String accountNumber);

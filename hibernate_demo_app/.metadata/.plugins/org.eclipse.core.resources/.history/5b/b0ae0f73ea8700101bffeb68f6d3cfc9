@@ -1,9 +1,0 @@
-package com.tss.Repository;
-
-import com.tss.Entity.Instructor;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-
-public class InstructorRepository extends JpaRepository<Instructor, Long>{
-	
-}
