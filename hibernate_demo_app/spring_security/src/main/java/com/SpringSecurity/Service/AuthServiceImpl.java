@@ -33,7 +33,6 @@ public class AuthServiceImpl implements AuthService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private JwtTokenProvider tokenProvider;
-	// Removed unused field: registrationDto
 
 	@Override
 	public UserResponseDto register(RegistrationDto registration) {

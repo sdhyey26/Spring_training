@@ -31,7 +31,7 @@ public class AdminController {
     }
 
     @PostMapping("/users/update")
-    public ResponseEntity<User> updateUser(@RequestBody AdminUpdateUserRequestDto request) {
+    public ResponseEntity<Account> updateUser(@RequestBody AdminUpdateUserRequestDto request) {
         return ResponseEntity.ok(adminService.updateUser(request));
     }
 

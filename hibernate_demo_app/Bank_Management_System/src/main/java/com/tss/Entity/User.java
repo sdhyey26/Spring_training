@@ -1,11 +1,24 @@
 package com.tss.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -28,19 +41,10 @@ public class User {
     private String password;
 
     @Column(name = "role", nullable = false, length = 20)
-    private String role; 
-
-    @Column(name = "full_name", length = 100)
-    private String fullName;
-
-    @Column(name = "mobile", length = 15)
-    private String mobile;
-
-    @Column(name = "email", length = 100)
+    private String role;    
+    
+    @Column(name = "email" , nullable = false , length = 35)
     private String email;
-
-    @Column(name = "aadhar", length = 12)
-    private String aadhar;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

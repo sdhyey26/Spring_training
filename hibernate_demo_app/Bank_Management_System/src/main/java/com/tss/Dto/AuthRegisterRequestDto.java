@@ -1,5 +1,7 @@
 package com.tss.Dto;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +21,8 @@ public class AuthRegisterRequestDto {
     private String email;
     private String aadhar;
     private String accountType;
-    private String initialDeposit;
+    private BigDecimal balance;
+    private String role;
 }
 
 

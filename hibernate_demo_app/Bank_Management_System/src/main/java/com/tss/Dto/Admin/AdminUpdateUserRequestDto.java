@@ -12,8 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AdminUpdateUserRequestDto {
-    private Long userId;
-    private String fullName;
+    private String accountnumber;
     private String username;
     private String email;
 }

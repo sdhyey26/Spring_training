@@ -33,7 +33,7 @@ public class CardApplication {
     private String cardType;
 
     @Column(name = "status", length = 20, nullable = false)
-    private String status; // Pending | Approved | Rejected
+    private String status; 																																												
 
     @Column(name = "applied_at", nullable = false)
     private Instant appliedAt;

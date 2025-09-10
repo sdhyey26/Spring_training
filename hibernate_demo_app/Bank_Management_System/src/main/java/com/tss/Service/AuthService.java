@@ -42,10 +42,7 @@ public class AuthService {
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword())) 
                 .role("Customer")
-                .fullName(request.getFullName())
-                .mobile(request.getMobile())
                 .email(request.getEmail())
-                .aadhar(request.getAadhar())
                 .build();
         user = userRepository.save(user);
 
@@ -58,7 +55,7 @@ public class AuthService {
                 .email(request.getEmail())
                 .aadhar(request.getAadhar())
                 .accountType(request.getAccountType())
-                .balance(new BigDecimal(request.getInitialDeposit() == null ? "0" : request.getInitialDeposit()))
+                .balance(request.getBalance())
                 .createdAt(Instant.now())
                 .build();
         accountRepository.save(account);
@@ -104,7 +101,6 @@ public class AuthService {
         token.setToken(java.util.UUID.randomUUID().toString());
         token.setExpiresAt(java.time.Instant.now().plus(java.time.Duration.ofMinutes(15)));
         passwordResetTokenRepository.save(token);
-        // TODO: send token via email/SMS (out of scope here)
     }
 
     public void resetPassword(ResetPasswordRequestDto request) {
