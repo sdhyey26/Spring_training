@@ -1,7 +1,0 @@
-package com.tss.Config;
-
-@Configuration
-
-public class MailConfig {
-
-}

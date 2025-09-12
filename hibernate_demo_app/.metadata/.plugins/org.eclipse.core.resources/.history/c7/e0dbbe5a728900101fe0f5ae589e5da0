@@ -1,6 +1,0 @@
-package com.tss.Service;
-
-public interface MailService {
-    MailResponseDto sendMail(MailRequestDto mailRequestDto);
-
-}

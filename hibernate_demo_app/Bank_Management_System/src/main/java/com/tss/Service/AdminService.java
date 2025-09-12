@@ -43,7 +43,7 @@ public class AdminService {
 	}
 
 	public List<CardApplication> listCardApplications() {
-		return cardApplicationRepository.findAll();
+		return cardApplicationRepository.findAllCardApplicationsNative();
 	}
 
 	public Page<Transaction> listTransactions(String accountNumber, int page, int size) {

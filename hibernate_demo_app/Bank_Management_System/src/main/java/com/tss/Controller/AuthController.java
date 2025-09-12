@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.tss.Dto.AuthLoginRequestDto;
 import com.tss.Dto.AuthRegisterRequestDto;
 import com.tss.Dto.AuthResponseDto;
@@ -41,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<Void> changePassword(@AuthenticationPrincipal(expression = "username") String username,
+    public ResponseEntity<Void> changePassword(@AuthenticationPrincipal String username,
                                                @RequestBody ChangePasswordRequestDto request) {
         Long userId = authService
                 .login(new AuthLoginRequestDto(username, request.getOldPassword()))
@@ -61,4 +62,5 @@ public class AuthController {
         authService.resetPassword(request);
         return ResponseEntity.noContent().build();
     }
+
 }

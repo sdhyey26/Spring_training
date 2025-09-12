@@ -1,7 +1,0 @@
-package com.tss.repository;
-
-import com.tss.entity.ImageEntity;
-
-public class ImageRepository extends JpaRepository<ImageEntity, Long>{
-
-}

@@ -1,8 +1,0 @@
-package com.tss.controller;
-
-
-@RestController
-@RequestMapping("/api/images")
-public class ImageController {
-
-}

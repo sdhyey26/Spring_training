@@ -1,7 +1,0 @@
-package com.tss.Dto;
-
-public class MailResponseDto {
-
-    private String status;
-    private String message;
-}

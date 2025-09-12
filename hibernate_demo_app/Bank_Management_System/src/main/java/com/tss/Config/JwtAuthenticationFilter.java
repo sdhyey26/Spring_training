@@ -31,17 +31,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             if (tokenProvider.validateToken(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
-                var authorities = tokenProvider.getRoles(token).stream()
-                        .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
+            	var authorities = tokenProvider.getRoles(token).stream()
+            		    .map(role -> role.replaceFirst("^ROLE_", "")) // strip any existing ROLE_
+            		    .map(role -> "ROLE_" + role)                  // ensure exactly one ROLE_
+            		    .map(SimpleGrantedAuthority::new)
+            		    .collect(Collectors.toList());
                 var auth = new UsernamePasswordAuthenticationToken(tokenProvider.getUsername(token), null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(auth);
+                System.out.println("Authorities from JWT: " + authorities);
+
             }
         }
 
         filterChain.doFilter(request, response);
     }
+
+
 }
 
 

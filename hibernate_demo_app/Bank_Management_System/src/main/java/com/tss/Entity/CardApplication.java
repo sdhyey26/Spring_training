@@ -21,13 +21,19 @@ public class CardApplication {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
+    @JsonIgnore	
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_number", referencedColumnName = "account_number", nullable = false)
     @JsonIgnore
     private Account account;
+    
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Long userId;
+
+    @Column(name = "account_number", insertable = false, updatable = false)
+    private String accountNumber;
 
     @Column(name = "card_type", length = 50, nullable = false)
     private String cardType;

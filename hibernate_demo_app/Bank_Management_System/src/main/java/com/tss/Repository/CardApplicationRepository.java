@@ -14,6 +14,9 @@ public interface CardApplicationRepository extends JpaRepository<CardApplication
     List<CardApplication> findByStatus(String status);
     long countByStatus(String status);
     
+    @Query(value = "SELECT * FROM card_applications", nativeQuery = true)
+    List<CardApplication> findAllCardApplicationsNative();
+    
     @Query("SELECT ca FROM CardApplication ca WHERE ca.account.accountNumber = :accountNumber")
     List<CardApplication> findByAccountNumber(@Param("accountNumber") String accountNumber);
     

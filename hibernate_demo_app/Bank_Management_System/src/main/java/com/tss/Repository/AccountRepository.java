@@ -11,10 +11,13 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
     List<Account> findByUser(User user);
+    Optional<Account> findFirstByUser(User user);
     Optional<Account> findByAccountNumber(String accountNumber);
 
     @Query("select coalesce(sum(a.balance),0) from Account a")
     BigDecimal sumAllBalances();
+
+    List<Account> findByStatus(String status);
 }
 
 

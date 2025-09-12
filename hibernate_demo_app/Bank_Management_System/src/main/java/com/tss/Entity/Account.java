@@ -45,6 +45,10 @@ public class Account {
 
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
+
+    @Column(name = "status", length = 20, nullable = false)
+    @Builder.Default
+    private String status = "ACTIVE"; 
 }
 
 
