@@ -12,7 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class CardApplicationRequestDto {
+    // Optional for customers; inferred from authenticated user if absent
     private Long userId;
+    // Optional for customers; inferred as first account if absent
     private String accountNumber;
     private String cardType;
 }

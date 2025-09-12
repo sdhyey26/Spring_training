@@ -46,6 +46,17 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/transactions/**").hasAnyRole("Admin", "Customer")
                 .requestMatchers(HttpMethod.GET, "/api/transactions/**").hasAnyRole("Admin", "Customer")
 
+                // 🔒 Loans
+                .requestMatchers("/api/loans/my-loans/**").hasRole("Customer")
+                .requestMatchers("/api/loans/apply").hasRole("Customer")
+                .requestMatchers("/api/loans/payment").hasRole("Customer")
+                .requestMatchers("/api/loans/{loanId}/payments").hasRole("Customer")
+                .requestMatchers("/api/loans/{loanId}").hasAnyRole("Admin", "Customer")
+                .requestMatchers("/api/loans").hasRole("Admin")
+                .requestMatchers("/api/loans/status/**").hasRole("Admin")
+                .requestMatchers("/api/loans/approve").hasRole("Admin")
+                .requestMatchers("/api/loans/{loanId}/disburse").hasRole("Admin")
+
                 // 🔒 Everything else
                 .anyRequest().authenticated()
             )

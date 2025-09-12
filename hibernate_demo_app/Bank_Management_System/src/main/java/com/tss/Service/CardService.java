@@ -38,6 +38,28 @@ public class CardService {
         return cardApplicationRepository.save(cardApplication);
     }
 
+    public CardApplication applyForAuthenticatedUser(CardApplicationRequestDto request, String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Account account;
+        if (request.getAccountNumber() == null || request.getAccountNumber().isBlank()) {
+            account = accountRepository.findFirstByUser(user)
+                    .orElseThrow(() -> new ResourceNotFoundException("Account not found for user"));
+        } else {
+            account = accountRepository.findById(request.getAccountNumber())
+                    .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+        }
+
+        CardApplication cardApplication = CardApplication.builder()
+                .user(user)
+                .account(account)
+                .cardType(request.getCardType())
+                .status("Pending")
+                .appliedAt(Instant.now())
+                .build();
+        return cardApplicationRepository.save(cardApplication);
+    }
+
     public List<CardApplication> getByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));

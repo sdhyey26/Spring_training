@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,11 @@ public class CardController {
     private final CardService cardService;
 
     @PostMapping("/apply")
-    public ResponseEntity<CardApplication> apply(@RequestBody CardApplicationRequestDto request) {
+    public ResponseEntity<CardApplication> apply(@RequestBody CardApplicationRequestDto request, Authentication authentication) {
+        if (request.getUserId() == null || request.getAccountNumber() == null || request.getAccountNumber().isBlank()) {
+            String username = (String) authentication.getPrincipal();
+            return ResponseEntity.ok(cardService.applyForAuthenticatedUser(request, username));
+        }
         return ResponseEntity.ok(cardService.apply(request));
     }
 
