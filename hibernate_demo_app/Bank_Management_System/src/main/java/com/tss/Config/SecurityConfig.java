@@ -39,7 +39,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/accounts/**").hasRole("Admin")   // all other account ops for admin
 
                 // 🔒 Cards
-                .requestMatchers("/api/cards/**").hasRole("Customer")
+                .requestMatchers(HttpMethod.POST, "/api/cards/apply").hasRole("Customer")
+                .requestMatchers(HttpMethod.GET, "/api/cards/**").hasRole("Admin")
 
                 // 🔒 Transactions
                 .requestMatchers(HttpMethod.POST, "/api/transactions/transfer").hasRole("Customer")
@@ -48,14 +49,14 @@ public class SecurityConfig {
 
                 // 🔒 Loans
                 .requestMatchers("/api/loans/my-loans/**").hasRole("Customer")
-                .requestMatchers("/api/loans/apply").hasRole("Customer")
-                .requestMatchers("/api/loans/payment").hasRole("Customer")
-                .requestMatchers("/api/loans/{loanId}/payments").hasRole("Customer")
-                .requestMatchers("/api/loans/{loanId}").hasAnyRole("Admin", "Customer")
-                .requestMatchers("/api/loans").hasRole("Admin")
-                .requestMatchers("/api/loans/status/**").hasRole("Admin")
-                .requestMatchers("/api/loans/approve").hasRole("Admin")
-                .requestMatchers("/api/loans/{loanId}/disburse").hasRole("Admin")
+                .requestMatchers(HttpMethod.POST, "/api/loans/apply").hasRole("Customer")
+                .requestMatchers(HttpMethod.POST, "/api/loans/payment").hasRole("Customer")
+                .requestMatchers(HttpMethod.GET, "/api/loans/*/payments").hasRole("Customer")
+                .requestMatchers(HttpMethod.GET, "/api/loans/*").hasAnyRole("Admin", "Customer")
+                .requestMatchers(HttpMethod.GET, "/api/loans").hasRole("Admin")
+                .requestMatchers(HttpMethod.GET, "/api/loans/status/**").hasRole("Admin")
+                .requestMatchers(HttpMethod.POST, "/api/loans/approve").hasRole("Admin")
+                .requestMatchers(HttpMethod.POST, "/api/loans/*/disburse").hasRole("Admin")
 
                 // 🔒 Everything else
                 .anyRequest().authenticated()

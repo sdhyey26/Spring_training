@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -38,10 +37,12 @@ public class AuthService {
             throw new BadRequestException("Username already exists");
         });
 
+        String role = (request.getRole() != null && request.getRole().equalsIgnoreCase("Admin")) ? "Admin" : "Customer";
+
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword())) 
-                .role("Customer")
+                .role(role)
                 .email(request.getEmail())
                 .build();
         user = userRepository.save(user);
