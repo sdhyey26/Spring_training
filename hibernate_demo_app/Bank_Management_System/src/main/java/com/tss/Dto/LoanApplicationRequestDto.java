@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Builder
 public class LoanApplicationRequestDto {
 
-    // Optional: if null, server will pick first account of logged-in user
     private String accountNumber;
 
     @NotBlank(message = "Loan type is required")

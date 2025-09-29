@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Builder
 public class LoanPaymentRequestDto {
 
-    // Optional: if null, server will auto-select user's single active loan
     private Long loanId;
 
     @NotNull(message = "Payment amount is required")

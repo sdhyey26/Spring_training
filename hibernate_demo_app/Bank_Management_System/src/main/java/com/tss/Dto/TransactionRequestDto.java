@@ -9,9 +9,8 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class TransactionRequestDto {
     private String fromAccountNumber;
-    private String toAccountNumber; // Optional if beneficiaryId is used
-    private Long beneficiaryId; // Optional, for using a saved beneficiary
+    private String toAccountNumber; 
+    private Long beneficiaryId; 
     private Double amount;
     private String description;
-    // getters and setters
 }

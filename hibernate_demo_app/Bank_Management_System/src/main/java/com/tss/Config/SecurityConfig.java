@@ -36,7 +36,7 @@ public class SecurityConfig {
 
                 // 🔒 Account management
                 .requestMatchers("/api/accounts/my-account/**").hasRole("Customer")
-                .requestMatchers("/api/accounts/**").hasRole("Admin")   // all other account ops for admin
+                .requestMatchers("/api/accounts/**").hasRole("Admin")  
 
                 // 🔒 Cards
                 .requestMatchers(HttpMethod.POST, "/api/cards/apply").hasRole("Customer")

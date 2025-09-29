@@ -63,7 +63,7 @@ public class Loan {
 
     @Column(name = "status", length = 20, nullable = false)
     @Builder.Default
-    private String status = "PENDING"; // PENDING, APPROVED, REJECTED, ACTIVE, COMPLETED, DEFAULTED
+    private String status = "PENDING"; 
 
     @Column(name = "purpose", length = 255)
     private String purpose;

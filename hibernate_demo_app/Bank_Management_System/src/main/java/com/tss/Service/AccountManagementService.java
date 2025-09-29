@@ -87,7 +87,7 @@ public class AccountManagementService {
             case "ACTIVE" -> List.of("SUSPENDED", "FROZEN", "CLOSED").contains(newStatus);
             case "SUSPENDED" -> List.of("ACTIVE", "FROZEN", "CLOSED").contains(newStatus);
             case "FROZEN" -> List.of("ACTIVE", "SUSPENDED", "CLOSED").contains(newStatus);
-            case "CLOSED" -> false; // Closed accounts cannot be reopened
+            case "CLOSED" -> false; 
             default -> false;
         };
     }

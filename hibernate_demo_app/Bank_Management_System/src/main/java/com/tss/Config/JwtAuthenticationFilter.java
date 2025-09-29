@@ -32,8 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = header.substring(7);
             if (tokenProvider.validateToken(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
             	var authorities = tokenProvider.getRoles(token).stream()
-            		    .map(role -> role.replaceFirst("^ROLE_", "")) // strip any existing ROLE_
-            		    .map(role -> "ROLE_" + role)                  // ensure exactly one ROLE_
+            		    .map(role -> role.replaceFirst("^ROLE_", "")) 
+            		    .map(role -> "ROLE_" + role)                  
             		    .map(SimpleGrantedAuthority::new)
             		    .collect(Collectors.toList());
                 var auth = new UsernamePasswordAuthenticationToken(tokenProvider.getUsername(token), null, authorities);

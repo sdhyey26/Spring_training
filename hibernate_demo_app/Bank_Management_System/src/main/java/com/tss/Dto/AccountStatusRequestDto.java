@@ -13,6 +13,6 @@ import lombok.Setter;
 @Builder
 public class AccountStatusRequestDto {
     private String accountNumber;
-    private String status; // ACTIVE, SUSPENDED, CLOSED, FROZEN
+    private String status; 
     private String reason;
 }

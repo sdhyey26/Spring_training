@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import com.tss.Dto.AuthLoginRequestDto;
 import com.tss.Dto.AuthRegisterRequestDto;
 import com.tss.Dto.AuthResponseDto;
@@ -15,7 +13,6 @@ import com.tss.Dto.ChangePasswordRequestDto;
 import com.tss.Dto.ForgotPasswordRequestDto;
 import com.tss.Dto.ResetPasswordRequestDto;
 import com.tss.Service.AuthService;
-
 import lombok.RequiredArgsConstructor;
 
 @RestController
